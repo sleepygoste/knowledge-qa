@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+.env
+.env.*
+
+# 运行时产物（体积大 / 含上传的原始资料）
+uploads/
+outputs/
+chroma_db/
+
+# 编辑器与系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
