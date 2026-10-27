@@ -53,22 +53,52 @@ query
 
 ## 快速开始
 
+### 1. 准备环境
+
 ```bash
-# 1. 环境
 python -m venv venv
-venv\Scripts\activate        # Windows
+venv\Scripts\activate          # Windows；macOS/Linux 用 source venv/bin/activate
 pip install -r requirements.txt
-
-# 2. 配置密钥
-set SILICONFLOW_API_KEY=sk-xxxx        # embedding / chat / rerank 默认硅基流动
-set TAVILY_API_KEY=tvly-xxxx           # 联网搜索 TAVILY
-
-# 3. 启动后端（默认 8000）
-uvicorn main:app --reload --port 8000
-
-# 4. 启动前端
-streamlit run app.py
 ```
+
+### 2. 配置密钥
+
+```bash
+set SILICONFLOW_API_KEY=sk-xxxx        # embedding / chat / rerank（硅基流动）
+set TAVILY_API_KEY=tvly-xxxx           # 联网搜索（可选）
+```
+
+macOS/Linux 用 `export`。
+
+### 3. 启动（三种方式任选其一）
+
+**A. 一键启动 · Windows**
+
+```bash
+start.bat
+```
+
+自动拉起两个窗口：后端 `uvicorn main:app --reload`（:8000）与前端
+`streamlit run app.py`，并统一使用 UTF-8 编码。
+
+**B. 一键启动 · 跨平台**
+
+```bash
+python run.py
+```
+
+以当前解释器拉起后端与前端两个子进程，`Ctrl+C` 一并关闭。
+需在已激活虚拟环境的终端中执行。
+
+**C. 手动分别启动**
+
+```bash
+uvicorn main:app --reload --port 8000    # 终端 1
+streamlit run app.py                     # 终端 2
+```
+
+启动后：接口文档 <http://127.0.0.1:8000/docs>，对话界面
+<http://localhost:8501>。
 
 ## 配置
 
@@ -105,6 +135,8 @@ knowledge-qa/
 ├── rag.py            文档解析、切块、向量化、混合检索与重排
 ├── tools.py          Agent 工具实现（联网 / Word / Excel / 本地检索）
 ├── tools_json.py     工具的 Function Calling schema
+├── start.bat         Windows 一键启动：后端 + 前端各开一个窗口
+├── run.py            跨平台一键启动：子进程方式，Ctrl+C 统一退出
 ├── config.py         Chroma 客户端、集合、请求模型、LLM 客户端
 ├── uploads/          上传的原始文件与抽取文本（不入库）
 ├── outputs/          生成的 Word / Excel（不入库）
